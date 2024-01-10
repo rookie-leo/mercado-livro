@@ -15,7 +15,7 @@ class CustomerService {
         return customers
     }
 
-    fun getCustomer(id: String): Customer {
+    fun getCustomer(id: Int): Customer {
         return customers.filter { it.id == id }.first()
     }
 
@@ -23,8 +23,8 @@ class CustomerService {
         val id = if (customers.isEmpty()) {
             1
         } else {
-            customers.last().id!!.toInt() + 1
-        }.toString()
+            customers.last().id!! + 1
+        }
 
         customer.id = id
 
@@ -38,7 +38,7 @@ class CustomerService {
         }
     }
 
-    fun deleteCustomer(id: String) {
+    fun deleteCustomer(id: Int) {
         customers.removeIf { it.id == id}
     }
 }

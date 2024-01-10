@@ -8,6 +8,6 @@ fun CreateCustomerRequest.toCustomerModel(): Customer {
     return Customer(name = this.name, email = this.email)
 }
 
-fun UpdateCustomerRequest.toCustomerModel(id: String): Customer {
+fun UpdateCustomerRequest.toCustomerModel(id: Int): Customer {
     return Customer(id = id, name = this.name, email = this.email)
 }
