@@ -17,7 +17,7 @@ class CustomerService(
         return customerRepository.findAll().toList()
     }
 
-    fun getCustomer(id: Int): Customer {
+    fun getCustomerById(id: Int): Customer {
         return customerRepository.findById(id).get()
     }
 
