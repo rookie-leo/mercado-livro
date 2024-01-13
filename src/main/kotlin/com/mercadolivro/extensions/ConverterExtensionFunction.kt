@@ -7,13 +7,14 @@ import com.mercadolivro.http.controllers.request.UpdateCustomerRequest
 import com.mercadolivro.models.Book
 import com.mercadolivro.models.Customer
 import com.mercadolivro.models.enums.BookStatus
+import com.mercadolivro.models.enums.CustomerStatus
 
 fun CreateCustomerRequest.toCustomerModel(): Customer {
-    return Customer(name = this.name, email = this.email)
+    return Customer(name = this.name, email = this.email, status = CustomerStatus.ATIVO)
 }
 
-fun UpdateCustomerRequest.toCustomerModel(id: Int): Customer {
-    return Customer(id = id, name = this.name, email = this.email)
+fun UpdateCustomerRequest.toCustomerModel(previousValue: Customer): Customer {
+    return Customer(id = previousValue.id, name = this.name, email = this.email, status = previousValue.status)
 }
 
 fun CreateBookRequest.toBookModel(customer: Customer): Book {
