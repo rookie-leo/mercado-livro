@@ -28,7 +28,12 @@ class BookService(
     }
 
     fun updateBook(book: Book) {
+        validStatusBook(book.status!!)
         bookRepository.save(book)
+    }
+
+    fun validStatusBook(statusBook: BookStatus) {
+        if (statusBook == BookStatus.DELETADO) throw Exception("Não é possivel alterar o status de um livro DELETADO")
     }
 
     fun deleteBookById(id: Int): Unit {
