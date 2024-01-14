@@ -1,24 +1,25 @@
 package com.mercadolivro.exceptions
 
+import com.mercadolivro.extensions.NotFoundException
 import com.mercadolivro.http.controllers.responses.ErrorResponse
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
-import java.lang.Exception
 
 @ControllerAdvice
 class ControllerAdvice {
 
-    @ExceptionHandler(Exception::class)
-    fun handleException(ex: Exception, request: WebRequest): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(NotFoundException::class)
+    fun handleException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val erro = ErrorResponse(
-            400,
-            "Teste de exception",
-            "0000",
+            HttpStatus.NOT_FOUND.value(),
+            ex.message!!,
+            ex.errorCode,
             null
         )
 
-        return ResponseEntity.badRequest().body(erro)
+        return ResponseEntity(erro, HttpStatus.NOT_FOUND)
     }
 }
