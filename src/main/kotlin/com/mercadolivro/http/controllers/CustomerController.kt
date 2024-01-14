@@ -1,9 +1,10 @@
 package com.mercadolivro.http.controllers
 
 import com.mercadolivro.extensions.toCustomerModel
+import com.mercadolivro.extensions.toCustomerResponse
 import com.mercadolivro.http.controllers.request.CreateCustomerRequest
 import com.mercadolivro.http.controllers.request.UpdateCustomerRequest
-import com.mercadolivro.models.Customer
+import com.mercadolivro.http.controllers.responses.CustomerResponse
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -14,13 +15,13 @@ class CustomerController(
     val customerService: CustomerService
 ) {
     @GetMapping
-    fun getAllCustomer(@RequestParam name: String?): List<Customer> {
-        return customerService.getAllCustomer(name)
+    fun getAllCustomer(@RequestParam name: String?): List<CustomerResponse> {
+        return customerService.getAllCustomer(name).map { it.toCustomerResponse() }
     }
 
     @GetMapping("/{id}")
-    fun getCustomer(@PathVariable id: Int): Customer {
-        return customerService.getCustomer(id)
+    fun getCustomer(@PathVariable id: Int): CustomerResponse {
+        return customerService.getCustomerById(id).toCustomerResponse()
     }
 
     @PostMapping
@@ -32,7 +33,8 @@ class CustomerController(
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun updateCustomer(@PathVariable id: Int, @RequestBody customerRequest: UpdateCustomerRequest) {
-        customerService.updateCustomer(customerRequest.toCustomerModel(id))
+        val customerSaved = customerService.getCustomerById(id)
+        customerService.updateCustomer(customerRequest.toCustomerModel(customerSaved))
     }
 
     @DeleteMapping("/{id}")
