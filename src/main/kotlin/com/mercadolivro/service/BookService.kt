@@ -4,6 +4,7 @@ import com.mercadolivro.extensions.NotFoundException
 import com.mercadolivro.models.Book
 import com.mercadolivro.models.Customer
 import com.mercadolivro.models.enums.BookStatus
+import com.mercadolivro.models.enums.Errors
 import com.mercadolivro.repositories.BookRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -28,7 +29,7 @@ class BookService(
 
     fun findBookById(id: Int): Book {
         return bookRepository.findById(id)
-            .orElseThrow{ NotFoundException("Livro com o id ${id} não encontrado", "0001") }
+            .orElseThrow{ NotFoundException(Errors.ME_1001.message.format(id), Errors.ME_1001.code) }
     }
 
     fun updateBook(book: Book) {
