@@ -1,8 +1,11 @@
 package com.mercadolivro.service
 
+import com.mercadolivro.exceptions.BadRequestException
+import com.mercadolivro.exceptions.NotFoundException
 import com.mercadolivro.models.Book
 import com.mercadolivro.models.Customer
 import com.mercadolivro.models.enums.BookStatus
+import com.mercadolivro.models.enums.Errors
 import com.mercadolivro.repositories.BookRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -26,7 +29,8 @@ class BookService(
     }
 
     fun findBookById(id: Int): Book {
-        return bookRepository.findById(id).orElseThrow()
+        return bookRepository.findById(id)
+            .orElseThrow{ NotFoundException(Errors.ME_1001.message.format(id), Errors.ME_1001.code) }
     }
 
     fun updateBook(book: Book) {
@@ -35,7 +39,7 @@ class BookService(
     }
 
     fun validStatusBook(statusBook: BookStatus) {
-        if (statusBook == BookStatus.DELETADO) throw Exception("Não é possivel alterar o status de um livro DELETADO")
+        if (statusBook == BookStatus.DELETADO) throw BadRequestException(Errors.ME_1002.message, Errors.ME_1002.code)
     }
 
     fun deleteBookById(id: Int): Unit {
