@@ -1,8 +1,10 @@
 package com.mercadolivro.http.controllers
 
 import com.mercadolivro.extensions.toBookModel
+import com.mercadolivro.extensions.toBookResponse
 import com.mercadolivro.http.controllers.request.CreateBookRequest
 import com.mercadolivro.http.controllers.request.UpdateBookRequest
+import com.mercadolivro.http.controllers.responses.BookResponse
 import com.mercadolivro.models.Book
 import com.mercadolivro.service.BookService
 import com.mercadolivro.service.CustomerService
@@ -23,18 +25,18 @@ class BookController(
         bookService.create(bookRequest.toBookModel(customer))
     }
     @GetMapping
-    fun findAllBooks(): List<Book> {
-        return bookService.findAllBooks()
+    fun findAllBooks(): List<BookResponse> {
+        return bookService.findAllBooks().map { it.toBookResponse() }
     }
 
     @GetMapping("/actives")
     @ResponseStatus(HttpStatus.OK)
-    fun findAllBooksStatusActive(): List<Book> =
-        bookService.findAllBooksStatusActive()
+    fun findAllBooksStatusActive(): List<BookResponse> =
+        bookService.findAllBooksStatusActive().map { it.toBookResponse() }
 
     @GetMapping("/{id}")
-    fun findBookById(@PathVariable id: Int): Book =
-        bookService.findBookById(id)
+    fun findBookById(@PathVariable id: Int): BookResponse =
+        bookService.findBookById(id).toBookResponse()
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
