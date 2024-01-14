@@ -1,4 +1,4 @@
-package com.mercadolivro.extensions
+package com.mercadolivro.exceptions
 
 import java.lang.Exception
 

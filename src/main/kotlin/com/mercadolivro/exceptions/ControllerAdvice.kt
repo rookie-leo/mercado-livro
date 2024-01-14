@@ -1,6 +1,5 @@
 package com.mercadolivro.exceptions
 
-import com.mercadolivro.extensions.NotFoundException
 import com.mercadolivro.http.controllers.responses.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

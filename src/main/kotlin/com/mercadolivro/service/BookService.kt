@@ -1,6 +1,6 @@
 package com.mercadolivro.service
 
-import com.mercadolivro.extensions.NotFoundException
+import com.mercadolivro.exceptions.NotFoundException
 import com.mercadolivro.models.Book
 import com.mercadolivro.models.Customer
 import com.mercadolivro.models.enums.BookStatus
