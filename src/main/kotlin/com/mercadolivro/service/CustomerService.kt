@@ -44,4 +44,8 @@ class CustomerService(
         customer.status = CustomerStatus.INATIVO
         updateCustomer(customer)
     }
+
+    fun emailAvalialable(email: String): Boolean {
+        return !customerRepository.existsByEmail(email)
+    }
 }
