@@ -32,11 +32,11 @@ data class Purchase(
     val books: List<Book>,
 
     @Column
-    val nfe: String,
+    val nfe: String? = null,
 
-    @Column
+    @Column(name = "purchase_total_value")
     val purchaseTotalValue: BigDecimal,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime = LocalDateTime.now()
 )
