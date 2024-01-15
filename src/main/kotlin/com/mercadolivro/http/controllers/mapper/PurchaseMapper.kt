@@ -16,7 +16,7 @@ class PurchaseMapper(
         val books = bookService.findAllByIds(request.booksId)
         return Purchase(
             customer = customer,
-            books = books,
+            books = books.toMutableList(),
             purchaseTotalValue = books.sumOf { it.price }
         )
     }

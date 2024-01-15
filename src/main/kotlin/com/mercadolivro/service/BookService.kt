@@ -62,4 +62,11 @@ class BookService(
     fun findAllByIds(booksId: Set<Int>): List<Book> {
         return bookRepository.findAllById(booksId)
     }
+
+    fun purchase(books: MutableList<Book>) {
+        books.map {
+            it.status = BookStatus.VENDIDO
+        }
+        bookRepository.saveAll(books)
+    }
 }
