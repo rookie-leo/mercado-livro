@@ -4,6 +4,7 @@ import com.mercadolivro.exceptions.NotFoundException
 import com.mercadolivro.models.Customer
 import com.mercadolivro.models.enums.CustomerStatus
 import com.mercadolivro.models.enums.Errors
+import com.mercadolivro.models.enums.Profile
 import com.mercadolivro.repositories.CustomerRepository
 import org.springframework.stereotype.Service
 import java.lang.Exception
@@ -27,15 +28,21 @@ class CustomerService(
     }
 
     fun createCustomer(customer: Customer) {
-        customerRepository.save(customer)
+        val customerCopy = customer.copy(
+            roles = setOf(Profile.CUSTOMER)
+        )
+        customerRepository.save(customerCopy)
     }
 
     fun updateCustomer(customer: Customer) {
         if (!customerRepository.existsById(customer.id!!)) {
             throw Exception()
         }
+        val customerCopy = customer.copy(
+            roles = setOf(Profile.CUSTOMER)
+        )
 
-        customerRepository.save(customer)
+        customerRepository.save(customerCopy)
     }
 
     fun deleteCustomer(id: Int) {
