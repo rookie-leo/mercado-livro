@@ -10,5 +10,8 @@ data class CreateCustomerRequest(
 
     @EmailAvailable
     @field:Email(message = "Email deve ester em formato valido!")
-    var email: String
+    var email: String,
+
+    @field:NotEmpty(message = "A senha deve ser informada!")
+    var password: String
 )
