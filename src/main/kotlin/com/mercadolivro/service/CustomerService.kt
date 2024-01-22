@@ -6,13 +6,15 @@ import com.mercadolivro.models.enums.CustomerStatus
 import com.mercadolivro.models.enums.Errors
 import com.mercadolivro.models.enums.Profile
 import com.mercadolivro.repositories.CustomerRepository
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.lang.Exception
 
 @Service
 class CustomerService(
     val customerRepository: CustomerRepository,
-    val bookService: BookService
+    val bookService: BookService,
+    private val bCrypt: BCryptPasswordEncoder
 ) {
 
     fun getAllCustomer(name: String?): List<Customer> {
@@ -29,7 +31,8 @@ class CustomerService(
 
     fun createCustomer(customer: Customer) {
         val customerCopy = customer.copy(
-            roles = setOf(Profile.CUSTOMER)
+            roles = setOf(Profile.CUSTOMER),
+            password = bCrypt.encode(customer.password)
         )
         customerRepository.save(customerCopy)
     }
