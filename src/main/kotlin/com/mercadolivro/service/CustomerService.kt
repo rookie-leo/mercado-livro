@@ -58,4 +58,8 @@ class CustomerService(
     fun emailAvalialable(email: String): Boolean {
         return !customerRepository.existsByEmail(email)
     }
+
+    fun findByEmail(email: String): Customer? {
+        return customerRepository.findByEmail(email)
+    }
 }
