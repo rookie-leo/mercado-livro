@@ -4,7 +4,7 @@ import com.mercadolivro.adapters.out.repositories.entities.enums.CustomerStatus
 import jakarta.persistence.*
 
 @Entity(name = "tb_customer")
-data class Customer(
+data class CustomerEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -21,7 +21,7 @@ data class Purchase(
 
     @ManyToOne
     @JoinColumn
-    val customer: Customer,
+    val customer: CustomerEntity,
 
     @ManyToMany
     @JoinTable(

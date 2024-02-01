@@ -21,7 +21,7 @@ data class Book(
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    var customer: Customer? = null
+    var customer: CustomerEntity? = null
 ) {
     @Column
     @Enumerated(EnumType.STRING)
@@ -36,7 +36,7 @@ data class Book(
         id: Int? = null,
         name: String,
         price: BigDecimal,
-        customer: Customer? = null,
+        customer: CustomerEntity? = null,
         status: BookStatus?
     ): this(id, name, price, customer) {
         this.status = status

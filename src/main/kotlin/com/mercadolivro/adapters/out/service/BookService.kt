@@ -3,7 +3,7 @@ package com.mercadolivro.adapters.out.service
 import com.mercadolivro.application.core.exceptions.BadRequestException
 import com.mercadolivro.application.core.exceptions.NotFoundException
 import com.mercadolivro.adapters.out.repositories.entities.Book
-import com.mercadolivro.adapters.out.repositories.entities.Customer
+import com.mercadolivro.adapters.out.repositories.entities.CustomerEntity
 import com.mercadolivro.adapters.out.repositories.entities.enums.BookStatus
 import com.mercadolivro.adapters.out.repositories.entities.enums.Errors
 import com.mercadolivro.adapters.out.repositories.BookRepository
@@ -51,7 +51,7 @@ class BookService(
         updateBook(book)
     }
 
-    fun deleteBookByCustomer(customer: Customer) {
+    fun deleteBookByCustomer(customer: CustomerEntity) {
         val books = bookRepository.findByCustomer(customer)
         for (book in books) {
             book.status = BookStatus.DELETADO
