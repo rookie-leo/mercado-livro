@@ -1,6 +1,6 @@
 package com.mercadolivro.validations
 
-import com.mercadolivro.service.CustomerService
+import com.mercadolivro.adapters.out.service.CustomerService
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 
