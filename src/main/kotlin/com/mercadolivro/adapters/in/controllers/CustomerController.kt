@@ -2,9 +2,9 @@ package com.mercadolivro.adapters.`in`.controllers
 
 import com.mercadolivro.adapters.`in`.controllers.request.CreateCustomerRequest
 import com.mercadolivro.adapters.`in`.controllers.responses.CustomerResponse
-import com.mercadolivro.application.core.usecases.extensions.toCustomer
 import com.mercadolivro.application.core.usecases.CreateCustomerUseCase
 import com.mercadolivro.application.core.usecases.ReadCustomerUseCase
+import com.mercadolivro.application.core.usecases.extensions.toCustomer
 import com.mercadolivro.application.core.usecases.extensions.toCustomerResponse
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -19,8 +19,7 @@ class CustomerController(
 ) {
     @GetMapping
     fun getAllCustomer(@RequestParam name: String?): List<CustomerResponse> {
-        //TODO - implementar a busca personazalida por nome
-        return readCustomerUseCase.read().map { it.toCustomerResponse() }
+        return readCustomerUseCase.read(name).map { it.toCustomerResponse() }
     }
 
     @GetMapping("/{id}")

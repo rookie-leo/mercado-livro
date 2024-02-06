@@ -8,8 +8,8 @@ import com.mercadolivro.application.ports.`in`.ReadCustomerInputPort
 class ReadCustomerUseCase(
     private val readCustomerAdapter: ReadCustomerAdapter
 ) : ReadCustomerInputPort {
-    override fun read(): List<Customer> {
-        return readCustomerAdapter.read().map { it.toCustomer() }
+    override fun read(name: String?): List<Customer> {
+        return readCustomerAdapter.read(name).map { it.toCustomer() }
     }
 
     override fun getCustomerById(id: Int): Customer {

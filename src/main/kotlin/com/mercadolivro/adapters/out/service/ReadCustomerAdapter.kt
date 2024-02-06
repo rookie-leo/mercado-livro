@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service
 class ReadCustomerAdapter(
     val customerRepository: CustomerRepository
 ) : ReadCustomerAdapterOutputPort {
-    override fun read(): MutableList<CustomerEntity> {
+    override fun read(name: String?): MutableList<CustomerEntity> {
+        if (name != null) return customerRepository.findByNameContaining(name).toMutableList()
         return customerRepository.findAll().toMutableList()
     }
 
