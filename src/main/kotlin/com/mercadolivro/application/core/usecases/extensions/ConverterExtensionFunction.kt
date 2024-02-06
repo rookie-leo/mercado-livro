@@ -12,6 +12,8 @@ import com.mercadolivro.adapters.out.repositories.entities.enums.BookStatus
 import com.mercadolivro.adapters.out.repositories.entities.enums.CustomerStatus
 import com.mercadolivro.application.core.domain.Customer
 
+//TODO - verificar uma melhor forma de organizar essas funções por seus respectivos mappers
+
 fun CreateCustomerRequest.toCustomer(): Customer {
     return Customer(name = this.name, email = this.email, status = CustomerStatus.ATIVO)
 }

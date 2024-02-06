@@ -22,11 +22,11 @@ class CustomerController(
         //TODO - implementar a busca personazalida por nome
         return readCustomerUseCase.read().map { it.toCustomerResponse() }
     }
-//
-//    @GetMapping("/{id}")
-//    fun getCustomer(@PathVariable id: Int): CustomerResponse {
-//        return customerService.getCustomerById(id).toCustomerResponse()
-//    }
+
+    @GetMapping("/{id}")
+    fun getCustomer(@PathVariable id: Int): CustomerResponse {
+        return readCustomerUseCase.getCustomerById(id).toCustomerResponse()
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
