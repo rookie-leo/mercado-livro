@@ -19,7 +19,7 @@ fun CreateCustomerRequest.toCustomer(): Customer {
 }
 
 fun Customer.toCustomerEntity(): CustomerEntity {
-    return CustomerEntity(name = this.name, email = this.email, status = this.status)
+    return CustomerEntity(id = this.id, name = this.name, email = this.email, status = this.status)
 }
 
 fun Customer.toCustomerResponse(): CustomerResponse {
@@ -30,8 +30,8 @@ fun CustomerEntity.toCustomer(): Customer {
     return Customer(name = this.name, email = this.email, status = this.status)
 }
 
-fun UpdateCustomerRequest.toCustomer(previousValue: Customer): Customer {
-    return Customer(id = previousValue.id, name = this.name, email = this.email, status = previousValue.status)
+fun UpdateCustomerRequest.toCustomer(id: Int, previousValue: Customer): Customer {
+    return Customer(id = id, name = this.name, email = this.email, status = previousValue.status)
 }
 
 fun CreateBookRequest.toBookModel(customer: CustomerEntity): Book {
