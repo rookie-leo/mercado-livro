@@ -3,16 +3,14 @@ package com.mercadolivro.adapters.out.service
 import com.mercadolivro.adapters.out.repositories.CustomerRepository
 import com.mercadolivro.adapters.out.repositories.entities.CustomerEntity
 import com.mercadolivro.adapters.out.repositories.entities.enums.Errors
-import com.mercadolivro.application.core.domain.Customer
 import com.mercadolivro.application.core.exceptions.NotFoundException
-import com.mercadolivro.application.core.usecases.extensions.toCustomer
-import com.mercadolivro.application.ports.out.ReadCustomerAdapterOutputPort
+import com.mercadolivro.application.ports.out.ReadCustomerOutputPort
 import org.springframework.stereotype.Service
 
 @Service
 class ReadCustomerAdapter(
     val customerRepository: CustomerRepository
-) : ReadCustomerAdapterOutputPort {
+) : ReadCustomerOutputPort {
     override fun read(name: String?): MutableList<CustomerEntity> {
         if (name != null) return customerRepository.findByNameContaining(name).toMutableList()
         return customerRepository.findAll().toMutableList()

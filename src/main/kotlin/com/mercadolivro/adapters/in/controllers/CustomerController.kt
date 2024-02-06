@@ -1,9 +1,11 @@
 package com.mercadolivro.adapters.`in`.controllers
 
 import com.mercadolivro.adapters.`in`.controllers.request.CreateCustomerRequest
+import com.mercadolivro.adapters.`in`.controllers.request.UpdateCustomerRequest
 import com.mercadolivro.adapters.`in`.controllers.responses.CustomerResponse
 import com.mercadolivro.application.core.usecases.CreateCustomerUseCase
 import com.mercadolivro.application.core.usecases.ReadCustomerUseCase
+import com.mercadolivro.application.core.usecases.UpdateCustomerUseCase
 import com.mercadolivro.application.core.usecases.extensions.toCustomer
 import com.mercadolivro.application.core.usecases.extensions.toCustomerResponse
 import jakarta.validation.Valid
@@ -15,7 +17,8 @@ import org.springframework.web.bind.annotation.*
 class CustomerController(
 //    val customerService: CustomerService
     val createCustomerUseCase: CreateCustomerUseCase,
-    val readCustomerUseCase: ReadCustomerUseCase
+    val readCustomerUseCase: ReadCustomerUseCase,
+    val updateCustomerUseCase: UpdateCustomerUseCase
 ) {
     @GetMapping
     fun getAllCustomer(@RequestParam name: String?): List<CustomerResponse> {
@@ -33,13 +36,13 @@ class CustomerController(
         createCustomerUseCase.create(customerRequest.toCustomer())
     }
 
-//    @PutMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    fun updateCustomer(@PathVariable id: Int, @Valid @RequestBody customerRequest: UpdateCustomerRequest) {
-//        val customerSaved = customerService.getCustomerById(id)
-//        customerService.updateCustomer(customerRequest.toCustomerModel(customerSaved))
-//    }
-//
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun updateCustomer(@PathVariable id: Int, @Valid @RequestBody customerRequest: UpdateCustomerRequest) {
+        val customerSaved = readCustomerUseCase.getCustomerById(id)
+        updateCustomerUseCase.update(customerRequest.toCustomer(customerSaved))
+    }
+
 //    @DeleteMapping("/{id}")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    fun deleteCustomer(@PathVariable id: Int) {

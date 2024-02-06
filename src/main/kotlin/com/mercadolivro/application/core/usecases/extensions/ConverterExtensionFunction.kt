@@ -30,8 +30,8 @@ fun CustomerEntity.toCustomer(): Customer {
     return Customer(name = this.name, email = this.email, status = this.status)
 }
 
-fun UpdateCustomerRequest.toCustomerModel(previousValue: CustomerEntity): CustomerEntity {
-    return CustomerEntity(id = previousValue.id, name = this.name, email = this.email, status = previousValue.status)
+fun UpdateCustomerRequest.toCustomer(previousValue: Customer): Customer {
+    return Customer(id = previousValue.id, name = this.name, email = this.email, status = previousValue.status)
 }
 
 fun CreateBookRequest.toBookModel(customer: CustomerEntity): Book {
