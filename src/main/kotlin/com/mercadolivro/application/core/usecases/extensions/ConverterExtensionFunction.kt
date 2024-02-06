@@ -20,6 +20,14 @@ fun Customer.toCustomerEntity(): CustomerEntity {
     return CustomerEntity(name = this.name, email = this.email, status = this.status)
 }
 
+fun Customer.toCustomerResponse(): CustomerResponse {
+    return CustomerResponse(name = this.name, email = this.email, status = this.status)
+}
+
+fun CustomerEntity.toCustomer(): Customer {
+    return Customer(name = this.name, email = this.email, status = this.status)
+}
+
 fun UpdateCustomerRequest.toCustomerModel(previousValue: CustomerEntity): CustomerEntity {
     return CustomerEntity(id = previousValue.id, name = this.name, email = this.email, status = previousValue.status)
 }
