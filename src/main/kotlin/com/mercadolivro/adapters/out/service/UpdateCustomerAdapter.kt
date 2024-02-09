@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UpdateCustomerAdapter(
-    val customerRepository: CustomerRepository
+    private val customerRepository: CustomerRepository
 ) : UpdateCustomerOutputPort {
     override fun updateCustomer(customer: Customer) {
         customerRepository.save(customer.toCustomerEntity())

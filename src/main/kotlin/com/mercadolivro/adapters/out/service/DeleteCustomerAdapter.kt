@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class DeleteCustomerAdapter(
-    val customerRepository: CustomerRepository
+    private val customerRepository: CustomerRepository
 ) : DeleteCustomerOutputPort {
     override fun deleteById(id: Int) {
         val customer = customerRepository.findById(id)
