@@ -4,6 +4,7 @@ import com.mercadolivro.adapters.`in`.controllers.request.CreateCustomerRequest
 import com.mercadolivro.adapters.`in`.controllers.request.UpdateCustomerRequest
 import com.mercadolivro.adapters.`in`.controllers.responses.CustomerResponse
 import com.mercadolivro.application.core.usecases.CreateCustomerUseCase
+import com.mercadolivro.application.core.usecases.DeleteCustomerUseCase
 import com.mercadolivro.application.core.usecases.ReadCustomerUseCase
 import com.mercadolivro.application.core.usecases.UpdateCustomerUseCase
 import com.mercadolivro.application.core.usecases.extensions.toCustomer
@@ -18,7 +19,8 @@ class CustomerController(
 //    val customerService: CustomerService
     val createCustomerUseCase: CreateCustomerUseCase,
     val readCustomerUseCase: ReadCustomerUseCase,
-    val updateCustomerUseCase: UpdateCustomerUseCase
+    val updateCustomerUseCase: UpdateCustomerUseCase,
+    val deleteCustomerUseCase: DeleteCustomerUseCase
 ) {
     @GetMapping
     fun getAllCustomer(@RequestParam name: String?): List<CustomerResponse> {
@@ -43,9 +45,9 @@ class CustomerController(
         updateCustomerUseCase.update(customerRequest.toCustomer(id, customerSaved))
     }
 
-//    @DeleteMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    fun deleteCustomer(@PathVariable id: Int) {
-//        customerService.deleteCustomer(id)
-//    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteCustomer(@PathVariable id: Int) {
+        deleteCustomerUseCase.deleteById(id)
+    }
 }
