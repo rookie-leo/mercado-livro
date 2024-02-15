@@ -9,5 +9,4 @@ class DeleteCustomerUseCase(
     override fun deleteById(id: Int) {
         deleteCustomerAdapter.deleteById(id)
     }
-
 }
