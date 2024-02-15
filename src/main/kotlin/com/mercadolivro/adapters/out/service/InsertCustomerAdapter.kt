@@ -13,6 +13,4 @@ class InsertCustomerAdapter(
     override fun saveCustomer(customer: Customer) {
         customerRepository.save(customer.toCustomerEntity())
     }
-
-
 }

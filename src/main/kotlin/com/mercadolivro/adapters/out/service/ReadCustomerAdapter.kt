@@ -20,5 +20,4 @@ class ReadCustomerAdapter(
         return customerRepository.findById(id)
             .orElseThrow{ NotFoundException(Errors.ME_2001.message.format(id), Errors.ME_2001.code) }
     }
-
 }
